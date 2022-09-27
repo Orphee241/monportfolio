@@ -1201,6 +1201,54 @@ main {
 }
 
 
+/* Skills progress Bar */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+
+.bar {
+  width: 70%;
+  height: 15px;
+  background: #fff;
+  border-radius: 5px;
+  position: relative;
+  transition: all 2s linear;
+  margin-bottom: 15px;
+}
+
+.bar-inner {
+  width: 0;
+  height: 15px;
+  line-height: 35px;
+  background: #fd3c49;
+  border-radius: 5px 0 0 5px;
+}
+
+.bar-percent {
+  position: absolute;
+  right: 10px;
+  top: -1px;
+  color: #000000;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
