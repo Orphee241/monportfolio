@@ -18,6 +18,10 @@ Primary use:    pxdraft
 11. Contact Us
 
 -------------------------------------------------------------------*/
+/* Skills progress Bar */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
 @import url(../vendor/bootstrap/css/bootstrap.min.css);
 @import url(../vendor/bootstrap/icons/bootstrap-icons.css);
 @import url(../vendor/owl-carousel/css/owl.carousel.min.css);
@@ -1201,9 +1205,7 @@ main {
 }
 
 
-/* Skills progress Bar */
-
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+ 
 
 
 .bar {
