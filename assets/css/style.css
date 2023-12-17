@@ -820,6 +820,7 @@ main {
       border: 1px solid #ff1b1b !important; }
 
 .contact-info {
+  margin-top: -5em;
   padding-top: 90px; }
   .contact-info .contact-name .icon {
     border: 1px solid rgba(255, 255, 255, 0.1);
