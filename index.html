@@ -11,8 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords"
-        content="Infographie, Développement web, Design graphic, Musique, Musique Assistée par Ordinateur, Beatmaking, Beatmaker, Numérique au Gabon, Gabon, Libreville, Essassa, NTIC, Nouvelles Techniques de l'Information et de la Communication, Formations en Infographie, Formation en beatmaking">
-    <meta name="description" content="Plongez dans l'univers du Graphic Design (Infographie), de la production musicale (beatmaking) avec GONA.
+        content="Infographie, Développement web, Design graphic,Numérique au Gabon, Gabon, Libreville, Essassa, NTIC, Nouvelles Techniques de l'Information et de la Communication, Formations en Infographie">
+    <meta name="description" content="Plongez dans l'univers du développement numériques avec GONA.
     Découvrez nos formations... ">
     <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.5.3/dist/js/swiffy-slider.min.js" crossorigin="anonymous"
         defer></script>
@@ -20,11 +20,68 @@
         crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/moment"></script>
     <!-- title -->
-    <title>Bienvenue chez GONA, ici on parle de développement web, d'infographie, le beatmaking...</title>
+    <title>Bienvenue chez GONA, ici on parle de développement de solutions numériques et de Design Graphic</title>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/gonafavicon2.png">
     <!-- theme css -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        /* Bouton WhatsApp flottant */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 25px;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+    </style>
 </head>
 <!-- Body Start -->
 
@@ -70,7 +127,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse-toggle">
                     <ul class="navbar-nav ml-auto">
                         <li><a class="nav-link"  href="#accueil"><span>Accueil</span></a></li>
-                        <li><a class="nav-link" href="#concept&formation"><span>Concepts & Formations</span></a></li>
+                        <li><a class="nav-link" href="#concept&formation"><span>Présentation</span></a></li>
                         <li><a class="nav-link" href="#competences"><span>Compétences</span></a>
                         </li>
                         <li><a class="nav-link" href="#services"><span>Services</span></a></li>
@@ -155,29 +212,39 @@
                                 <p>Je suis née à Libreville. Je suis d'origine Gabonaise.</p>
                             </div> -->
                             <div class="about-row">
-                                <h3>Présentation des concepts</h3>
+                                <h3>Présentation</h3>
                                 <div class="row g-4">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <p><span style="color: #12c2e9;"><strong>Qu'est-ce qu'un développeur web ?</strong></span></p>
-                                        <p><i style=" color: #12c2e9;" class="bi bi-check2-all"></i> <strong>Un développeur web</strong>
-                                            est une personne chargée de réaliser des interfaces qui vont fonctionner sur
-                                            le web.
-                                            Ces interfaces peuvent être visibles, comme elles peuvent être invisibles.
-                                            <span style="color: #12c2e9;"></span>
-                                        </p><br>
-                                        <p>Le développeur qui réalise des interfaces visibles est appelé <span
-                                                style="color: #12c2e9;"><strong>développeur frontend</strong></span>.
-                                            Tandis que l'autre est appelé <span
-                                                style="color: #12c2e9;"><strong>développeur backend</strong></span>.
-                                        </p><br>
-                                        <p>Toutefois, il y a également un troisième type de développeur web appelé <span
-                                                style="color: #12c2e9;"><strong>développeur full stack</strong>,</span>
-                                            dont la mission est de créer les deux types d'interfaces.
-                                        </p><br>
-                                        <p><span style="color: #12c2e9;"><strong>Qu'est-ce qu'un graphic designer ?</strong></span></p>
-                                        <p><i style=" color: #12c2e9;" class="bi bi-check2-all"></i> <strong>Un graphic designer</strong>
-                                            est une personne dont la mission est de combiner et d’organiser les éléments
-                                            visuels pour créer un message efficace et attrayant.</p><br>
+                                        <div class="personal-info">
+                                            <h4 style="color: #12c2e9; margin-bottom: 20px;">Détails personnels</h4>
+                                            
+                                            <div class="info-item" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                                <i class="bi bi-envelope" style="color: #12c2e9; margin-right: 10px; font-size: 18px;"></i>
+                                                <span>contact@gona241.com</span>
+                                            </div>
+                                            
+                                            <div class="info-item" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                                <i class="bi bi-telephone" style="color: #12c2e9; margin-right: 10px; font-size: 18px;"></i>
+                                                <span>+241 77187894 / +241 62102805</span>
+                                            </div>
+                                            
+                                            <div class="info-item" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                                <i class="bi bi-geo-alt" style="color: #12c2e9; margin-right: 10px; font-size: 18px;"></i>
+                                                <span>Nkok Ntoum</span>
+                                            </div>
+                                            
+                                            <div class="info-item" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                                <i class="bi bi-calendar" style="color: #12c2e9; margin-right: 10px; font-size: 18px;"></i>
+                                                <span>23 janvier 1996</span>
+                                            </div>
+                                            
+                                            <div class="info-item" style="margin-bottom: 15px; display: flex; align-items: center;">
+                                                <i class="bi bi-flag" style="color: #12c2e9; margin-right: 10px; font-size: 18px;"></i>
+                                                <span>Gabonaise</span>
+                                            </div>
+                                            
+
+                                        </div>
 
                                     </div>
                                 </div>
@@ -631,6 +698,12 @@
         });
     </script>
     <!-- end -->
+    
+    <!-- Bouton WhatsApp flottant -->
+    <a href="https://wa.me/24177187894" target="_blank" class="whatsapp-float" title="Contactez-moi sur WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
 </body>
 <!-- Body End -->
 
@@ -638,4 +711,3 @@
 <!-- Mirrored from pxdraft.com/themeforest/weasley/weasley/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 13 Aug 2022 17:24:25 GMT -->
 
 </html>
-<!DOCTYPE html>
