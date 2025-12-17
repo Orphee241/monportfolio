@@ -20,10 +20,21 @@ spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - portfolio.example.com  # REPLACE WITH YOUR DOMAIN
+    - gona241.com
+    - www.gona241.com
     secretName: portfolio-tls
   rules:
-  - host: portfolio.example.com  # REPLACE WITH YOUR DOMAIN
+  - host: gona241.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: portfolio-service
+            port:
+              number: 80
+  - host: www.gona241.com
     http:
       paths:
       - path: /
