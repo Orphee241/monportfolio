@@ -142,6 +142,9 @@ jobs:
       # Apply manifests to cluster
       - name: Apply Kubernetes manifests
         run: |
+          # Create namespace if it doesn't exist
+          kubectl apply -f k8s/namespace.yaml
+          
           # Apply ConfigMap
           kubectl apply -f k8s/configmap.yaml
           
@@ -157,22 +160,18 @@ jobs:
       # Wait for rollout to complete
       - name: Wait for rollout to complete
         run: |
-          kubectl rollout status deployment/portfolio -n ${NAMESPACE:-default} --timeout=10m
-        env:
-          NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
+          kubectl rollout status deployment/portfolio -n portfolio --timeout=10m
       
       # Verify deployment success
       - name: Verify deployment
         run: |
           echo "Checking deployment status..."
-          kubectl get deployment portfolio -n ${NAMESPACE:-default}
+          kubectl get deployment portfolio -n portfolio
           
           echo "Checking pod status..."
-          kubectl get pods -l app=portfolio -n ${NAMESPACE:-default}
+          kubectl get pods -l app=portfolio -n portfolio
           
           echo "Checking service..."
-          kubectl get service portfolio-service -n ${NAMESPACE:-default}
+          kubectl get service portfolio-service -n portfolio
           
           echo "Deployment completed successfully!"
-        env:
-          NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
