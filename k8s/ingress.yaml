@@ -8,16 +8,14 @@ metadata:
   annotations:
     # Cert-manager annotations for automatic TLS certificate provisioning
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    # HTTPS redirect annotation (nginx ingress controller)
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # Traefik HTTPS redirect
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
     # Additional security headers
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      more_set_headers "X-Frame-Options: SAMEORIGIN";
-      more_set_headers "X-Content-Type-Options: nosniff";
-      more_set_headers "X-XSS-Protection: 1; mode=block";
+    traefik.ingress.kubernetes.io/custom-response-headers: |
+      X-Frame-Options:SAMEORIGIN||X-Content-Type-Options:nosniff||X-XSS-Protection:1; mode=block
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   tls:
   - hosts:
     - gona241.com
