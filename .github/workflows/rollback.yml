@@ -1,0 +1,137 @@
+name: Rollback Deployment
+
+# Manual trigger with version input
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to rollback to (e.g., sha-abc1234 or revision number)'
+        required: true
+        type: string
+      rollback_type:
+        description: 'Rollback type'
+        required: true
+        type: choice
+        options:
+          - 'image-tag'
+          - 'revision-number'
+        default: 'image-tag'
+      namespace:
+        description: 'Kubernetes namespace (optional, defaults to default)'
+        required: false
+        type: string
+        default: 'default'
+
+jobs:
+  rollback-deployment:
+    name: Rollback to Previous Version
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # Setup kubectl
+      - name: Setup kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'latest'
+      
+      # Configure kubectl with kubeconfig from secrets
+      - name: Configure kubectl
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+      
+      # Display current deployment status
+      - name: Display current deployment status
+        run: |
+          echo "Current deployment status:"
+          kubectl get deployment portfolio -n ${{ inputs.namespace }}
+          
+          echo ""
+          echo "Current pods:"
+          kubectl get pods -l app=portfolio -n ${{ inputs.namespace }}
+          
+          echo ""
+          echo "Deployment history:"
+          kubectl rollout history deployment/portfolio -n ${{ inputs.namespace }}
+      
+      # Rollback by image tag
+      - name: Rollback to specific image tag
+        if: inputs.rollback_type == 'image-tag'
+        working-directory: monportfolio
+        run: |
+          # Construct full image reference
+          IMAGE_TAG="ghcr.io/${{ github.repository }}:${{ inputs.version }}"
+          echo "Rolling back to image: $IMAGE_TAG"
+          
+          # Update the image in deployment.yaml
+          sed -i "s|image:.*|image: $IMAGE_TAG|g" k8s/deployment.yaml
+          
+          # Display the updated manifest for verification
+          echo "Updated deployment manifest:"
+          cat k8s/deployment.yaml
+          
+          # Apply the updated deployment
+          kubectl apply -f k8s/deployment.yaml
+      
+      # Rollback by revision number
+      - name: Rollback to specific revision
+        if: inputs.rollback_type == 'revision-number'
+        run: |
+          echo "Rolling back to revision: ${{ inputs.version }}"
+          kubectl rollout undo deployment/portfolio -n ${{ inputs.namespace }} --to-revision=${{ inputs.version }}
+      
+      # Wait for rollback to complete
+      - name: Wait for rollback to complete
+        run: |
+          echo "Waiting for rollback to complete..."
+          kubectl rollout status deployment/portfolio -n ${{ inputs.namespace }} --timeout=5m
+      
+      # Verify rollback success
+      - name: Verify rollback
+        run: |
+          echo "Checking deployment status after rollback..."
+          kubectl get deployment portfolio -n ${{ inputs.namespace }}
+          
+          echo ""
+          echo "Checking pod status..."
+          kubectl get pods -l app=portfolio -n ${{ inputs.namespace }}
+          
+          echo ""
+          echo "Checking pod details..."
+          kubectl describe pods -l app=portfolio -n ${{ inputs.namespace }} | grep -A 5 "Image:"
+          
+          echo ""
+          echo "Rollback completed successfully!"
+      
+      # Health check verification
+      - name: Verify health checks
+        run: |
+          echo "Waiting for pods to be ready..."
+          kubectl wait --for=condition=ready pod -l app=portfolio -n ${{ inputs.namespace }} --timeout=3m
+          
+          echo ""
+          echo "All pods are healthy and ready!"
+      
+      # Display rollback summary
+      - name: Display rollback summary
+        if: always()
+        run: |
+          echo "=== Rollback Summary ==="
+          echo "Rollback Type: ${{ inputs.rollback_type }}"
+          echo "Target Version: ${{ inputs.version }}"
+          echo "Namespace: ${{ inputs.namespace }}"
+          echo ""
+          echo "Final deployment status:"
+          kubectl get deployment portfolio -n ${{ inputs.namespace }}
+          echo ""
+          echo "Final pod status:"
+          kubectl get pods -l app=portfolio -n ${{ inputs.namespace }}
+          echo ""
+          echo "Deployment history:"
+          kubectl rollout history deployment/portfolio -n ${{ inputs.namespace }}
+

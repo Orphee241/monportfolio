@@ -1,0 +1,16 @@
+{
+  "name": "GONA - Portfolio",
+  "short_name": "GONA",
+  "description": "Portfolio de Glen Orphée NZIENGUI-AKOUMBOU - Développeur Node.js (Next.js) & Graphic Designer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

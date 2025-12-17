@@ -1,0 +1,66 @@
+{
+  "name": "monportfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint .",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "analyze": "set ANALYZE=true&& npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orphee241/monportfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Orphee241/monportfolio/issues"
+  },
+  "homepage": "https://github.com/Orphee241/monportfolio#readme",
+  "dependencies": {
+    "framer-motion": "^12.23.26",
+    "next": "^16.0.10",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-icons": "^5.5.0",
+    "swiper": "^12.0.3"
+  },
+  "devDependencies": {
+    "@axe-core/react": "^4.11.0",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.2",
+    "@next/bundle-analyzer": "^16.0.10",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@types/node": "^25.0.2",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/ui": "^4.0.15",
+    "autoprefixer": "^10.4.23",
+    "axe-core": "^4.11.0",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.0.10",
+    "fast-check": "^4.4.0",
+    "jest-axe": "^10.0.0",
+    "jsdom": "^27.3.0",
+    "postcss": "^8.5.6",
+    "prettier": "^3.7.4",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.49.0",
+    "vitest": "^4.0.15",
+    "vitest-axe": "^0.1.0",
+    "yaml": "^2.8.2"
+  }
+}
