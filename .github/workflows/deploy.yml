@@ -127,8 +127,9 @@ jobs:
       # Update deployment manifest with new image tag
       - name: Update deployment manifest
         run: |
-          # Extract the SHA tag from the image
-          IMAGE_TAG="ghcr.io/${{ github.repository }}:sha-${GITHUB_SHA::7}"
+          # Extract the SHA tag from the image (convert to lowercase)
+          REPO_LOWER=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_TAG="ghcr.io/${REPO_LOWER}:sha-${GITHUB_SHA::7}"
           echo "Updating deployment with image: $IMAGE_TAG"
           
           # Update the image in deployment.yaml
@@ -156,7 +157,7 @@ jobs:
       # Wait for rollout to complete
       - name: Wait for rollout to complete
         run: |
-          kubectl rollout status deployment/portfolio -n ${NAMESPACE:-default} --timeout=5m
+          kubectl rollout status deployment/portfolio -n ${NAMESPACE:-default} --timeout=10m
         env:
           NAMESPACE: ${{ secrets.K8S_NAMESPACE }}
       

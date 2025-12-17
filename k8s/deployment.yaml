@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: REGISTRY_PLACEHOLDER/portfolio:TAG_PLACEHOLDER
+        image: ghcr.io/orphee241/monportfolio:latest
         ports:
         - containerPort: 3000
           name: http
