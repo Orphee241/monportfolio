@@ -25,22 +25,18 @@ jobs:
       
       # Install dependencies with caching
       - name: Install dependencies
-        working-directory: monportfolio
         run: npm ci
       
       # Run linting checks
       - name: Run linting
-        working-directory: monportfolio
         run: npm run lint
       
       # Run tests
       - name: Run tests
-        working-directory: monportfolio
         run: npm run test
       
       # Build Next.js application
       - name: Build application
-        working-directory: monportfolio
         run: npm run build
       
       # Upload build artifacts for next job
@@ -48,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: monportfolio/.next
+          path: .next
           retention-days: 1
 
   build-and-push-image:
@@ -97,8 +93,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: monportfolio
-          file: monportfolio/Dockerfile
+          context: .
+          file: Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -130,7 +126,6 @@ jobs:
       
       # Update deployment manifest with new image tag
       - name: Update deployment manifest
-        working-directory: monportfolio
         run: |
           # Extract the SHA tag from the image
           IMAGE_TAG="ghcr.io/${{ github.repository }}:sha-${GITHUB_SHA::7}"
@@ -145,7 +140,6 @@ jobs:
       
       # Apply manifests to cluster
       - name: Apply Kubernetes manifests
-        working-directory: monportfolio
         run: |
           # Apply ConfigMap
           kubectl apply -f k8s/configmap.yaml
