@@ -22,8 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: 'monportfolio/package-lock.json'
       
       # Install dependencies with caching
       - name: Install dependencies
